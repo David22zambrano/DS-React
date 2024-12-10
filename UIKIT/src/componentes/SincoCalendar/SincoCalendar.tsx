@@ -1,6 +1,6 @@
 // @ts-ignore
 import { Calendar, EventProps, momentLocalizer, Views } from 'react-big-calendar';
-// import '../../styles/calendar.scss';
+import '../styles/calendar.scss';
 import { useMemo, useState, useEffect } from 'react';
 import { CalendarToolbar, Evento, getMessagesES } from '.';
 import { MyEvent, SincoCalendarProps } from './generales';

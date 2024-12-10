@@ -1,5 +1,5 @@
-import React, { useState } from "react";
-import { Box, Button, TextField } from "@mui/material";
+import React, { useCallback, useState } from "react";
+import { Button, Stack, Box, TextField } from "@mui/material";
 import { MultiSelect } from "./MultiSelect";
 
 interface Item {
@@ -14,53 +14,47 @@ const items: Item[] = [
   { id: 4, name: "Item 4" },
 ];
 
-export const PruebaMultiSelect = () => {
+export const EjemploMultiSelect = () => {
+
   const [anchorEl, setAnchorEl] = useState<HTMLElement | null>(null);
-  const [selectedItems, setSelectedItems] = useState<Item[]>([]);
+  // const [selectedItems, setSelectedItems] = useState<Item[]>([]);
+  const [filterValue, setFilterValue] = useState("");
 
-  const handleOpen = (event: React.MouseEvent<HTMLElement>) => {
+  const handleOpen = useCallback((event: React.MouseEvent<HTMLElement>) => {
     setAnchorEl(event.currentTarget);
-  };
+  }, []);
 
-  const handleClose = () => {
+  const handleClose = useCallback(() => {
     setAnchorEl(null);
-  };
+    setFilterValue("");
+  }, []);
 
   const isPopoverOpen = Boolean(anchorEl);
 
-  const handleFilter = (items: Item[], filterValue: string) => {
+  const handleFilter = useCallback((items: Item[], filterValue: string) => {
     return items.filter((item) =>
       item.name.toLowerCase().includes(filterValue.toLowerCase())
     );
-  };
+  }, [])
 
   const getItemLabel = (item: Item) => item.name;
+  const filteredItems = handleFilter(items, filterValue);
 
   return (
-    <div>
-      <Button variant="contained" onClick={handleOpen}>
-        Open MultiSelect
+    <Box width={500}>
+      <Button variant="text" onClick={handleOpen}>
+        MultiSelectFilter 
       </Button>
 
       <MultiSelect<Item>
-        topPanel={
-          <TextField
-            fullWidth
-            size="small"
-            placeholder="Filtrar"
-            label="Buscar"
-          />
-        }
-        // actions={}
         open={isPopoverOpen}
         anchorEl={anchorEl}
         onClose={handleClose}
-        items={items}
+        items={filteredItems}
+        // actions
         dense
-        handleFilter={handleFilter}
         getItemLabel={getItemLabel}
       />
-    </div>
+    </Box >
   );
 };
-

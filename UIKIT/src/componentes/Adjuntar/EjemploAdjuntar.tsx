@@ -1,7 +1,7 @@
 
 // ADJUNTAR ARCHIVOS -------------------------------------------------------
 import React from 'react';
-import { AdjuntarArchivoGenerico } from './AdjuntarArchivos';
+import { AdjuntarArchivo } from './AdjuntarArchivos';
 
 interface MiArchivo {
   id: string;
@@ -9,7 +9,7 @@ interface MiArchivo {
   tamano: number;
 }
 
-export const EjemploAdjuntar= () => {
+export const EjemploAdjuntar = () => {
   const transformarArchivo = (file: File): MiArchivo => ({
     id: file.lastModified.toString(),
     nombre: file.name,
@@ -21,9 +21,10 @@ export const EjemploAdjuntar= () => {
   };
 
   return (
-    <AdjuntarArchivoGenerico<MiArchivo>
-      fecthDB={manejarArchivos}
-      transformFile={transformarArchivo}
+    <AdjuntarArchivo<MiArchivo>
+      // compacto
+      fectuarBaseDeDatos={manejarArchivos}
+      transformarArchivo={transformarArchivo}
     />
   );
 };

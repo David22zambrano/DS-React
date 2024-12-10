@@ -1,1 +1,1 @@
-// Este archivo va contener toda la configuracion del componente del calendario
+// Este archivo va contener toda la configuracion del componente del calendario en un archivo .tsx
