@@ -13,7 +13,6 @@ import { Close } from '@mui/icons-material';
 import { stateConfig } from './Data';
 import { ModalProps } from './interfaces';
 
-
 export const ModalSinco: React.FC<ModalProps> = ({
     open,
     onCancel,
