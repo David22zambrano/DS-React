@@ -22,11 +22,11 @@ import { Stack } from "@mui/material"
 function App() {
   return (
     <Stack alignContent={"center"} justifyContent={"center"} p={2} gap={2}>
-      {/* <EjemploAdjuntar />
+      <EjemploAdjuntar />
       <Stack flexDirection={"row"} alignContent={"center"} justifyContent={"center"} p={2} gap={2}>
         <PruebaModal />
         <EjemploMultiSelect />
-      </Stack> */}
+      </Stack>
 {/* 
       <SincoCalendar
         onDoubleClickEvent={() => { console.log('funciono ') }}
