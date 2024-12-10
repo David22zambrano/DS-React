@@ -1,0 +1,28 @@
+//   event: MyEvent, // used by each view (Month, Day, Week)
+//   eventWrapper: MyEventWrapper,
+//   eventContainerWrapper: MyEventContainerWrapper,
+//   dateCellWrapper: MyDateCellWrapper,
+//   dayColumnWrapper: MyDayColumnWrapper,
+//   timeSlotWrapper: MyTimeSlotWrapper,
+//   timeGutterHeader: MyTimeGutterWrapper,
+//   resourceHeader: MyResourceHeader,
+//   toolbar: MyToolbar,
+//   showMore: MyShowMoreButton,
+//   agenda: {
+//     event: MyAgendaEvent, // with the agenda view use a different component to render events
+//     time: MyAgendaTime,
+//     date: MyAgendaDate,
+//   },
+//   day: {
+//     header: MyDayHeader,
+//     event: MyDayEvent,
+//   },
+//   week: {
+//     header: MyWeekHeader,
+//     event: MyWeekEvent,
+//   },
+//   month: {
+//     header: MyMonthHeader,
+//     dateHeader: MyMonthDateHeader,
+//     event: MyMonthEvent,
+//   }
