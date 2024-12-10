@@ -1,18 +1,34 @@
 import moment from "moment"
-import { EjemploAdjuntar, PruebaMultiSelect } from "./componentes"
+import { EjemploAdjuntar, EjemploMultiSelect } from "./componentes"
 import { PruebaModal } from "./componentes/Modal"
 import { SincoCalendar } from "./componentes/SincoCalendar/SincoCalendar"
+import { Stack } from "@mui/material"
+
+// TIPS:
+
+// Crtl + Ñ muestra la terminar de visualCode
+// Comentar / Descomentar lineas de codigo :  Ctrl + K + C   
+
+// Como ejecuctar el proyecto.
+
+// 1. Instalacion de node modules desde la terminal de VisualCode
+//    Comando:  npm install 
+
+// Ejecucion del proyecto
+//    Comando: npm run dev
+
 
 
 function App() {
   return (
-    // comentar =  Control + K + C / Descomentar  CTrl + K+ C
-    <>
-      <EjemploAdjuntar />
-      <PruebaModal />
-      
-      <PruebaMultiSelect />
-      {/* <SincoCalendar
+    <Stack alignContent={"center"} justifyContent={"center"} p={2} gap={2}>
+      {/* <EjemploAdjuntar />
+      <Stack flexDirection={"row"} alignContent={"center"} justifyContent={"center"} p={2} gap={2}>
+        <PruebaModal />
+        <EjemploMultiSelect />
+      </Stack> */}
+{/* 
+      <SincoCalendar
         onDoubleClickEvent={() => { console.log('funciono ') }}
         events={[
           {
@@ -35,7 +51,7 @@ function App() {
           },
         ]}
       /> */}
-    </>
+    </Stack>
   )
 }
 

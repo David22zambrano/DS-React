@@ -1,54 +1,38 @@
-// ----------------------------------------------Modal Sinco
-import { useState } from "react";
-import { Button } from "@mui/material";
+// ----------------------------------------------Coponente Modal Sinco 
+import { useCallback, useState } from "react";
+import { Box, Button } from "@mui/material";
 import { ModalSinco } from "./Modal";
 
 export const PruebaModal = () => {
     const [open, setOpen] = useState(false);
 
-    const handleClose = () => {
+    const controlCierre = useCallback(() => { 
         setOpen(prev => !prev);
-    };
+    },[])
 
-    const handleCancel = () => {
+    const manejoCancelar =  useCallback(() => {
         console.log('Acción de cancelar');
         setOpen(prev => !prev);
-    };
+    },[])
 
-    const handleAccept = () => {
+    const manejoAceptar = useCallback(() => {
         console.log('Acción de aceptar');
         setOpen(prev => !prev);
-    };
+    },[])
 
     return (
-        <>
-            <Button onClick={() => handleClose()}>Abrir Modal</Button>
+        <Box>
+            <Button onClick={() => controlCierre()}>Abrir Modal</Button>
             <ModalSinco
                 open={open}
-                onCancel={handleCancel}
-                onAccept={handleAccept}
+                onCancel={manejoCancelar}
+                onAccept={manejoAceptar}
                 title="Título del Modal warning"
-                // description="Esta es la descripción del modal." / esto es opcional se desea cambiar descripcion o por defecto trae ya una
-                state="warning"
+                
+                // Dsto es opcional se desea cambiar descripcion o por defecto trae ya una
+                // description="Esta es la descripción del modal." 
+                state="warning" // Tipos del modal "warning" | "error" | "primary".
             />
-            {/* <ModalSinco
-                open={open}
-                onCancel={handleCancel}
-                onAccept={handleAccept}
-                title="Título del Modal primary"
-                // description="Esta es la descripción del modal." / esto es opcional la descripcion o por defecto trae ya un
-                state="primary"
-            /> */}
-            
-            {/* <ModalSinco
-                open={open}
-                onCancel={handleCancel}
-                onAccept={handleAccept}
-                title="Título del Modal error"
-                // description="Esta es la descripción del modal." / esto es opcional la descripcion o por defecto trae ya un
-                state="error"
-            /> */}
-
-        </>
+        </Box>
     );
 };
