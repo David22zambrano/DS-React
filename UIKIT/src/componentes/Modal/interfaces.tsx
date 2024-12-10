@@ -10,7 +10,7 @@ export interface ModalProps {
     onAccept: () => void;
     title: string;
     description?: string;
-    state: 'inherit' |'primary' | 'error' | 'warning';
+    state: 'inherit' |'info' | 'error' | 'warning';
     bgIcon?: ModalIconProps;
 
 }
