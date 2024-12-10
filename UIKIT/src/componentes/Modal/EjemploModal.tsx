@@ -31,7 +31,7 @@ export const PruebaModal = () => {
                 
                 // Dsto es opcional se desea cambiar descripcion o por defecto trae ya una
                 // description="Esta es la descripción del modal." 
-                state="warning" // Tipos del modal "warning" | "error" | "info".
+                state="info" // Tipos del modal "warning" | "error" | "info".
             />
         </Box>
     );
