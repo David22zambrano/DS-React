@@ -19,7 +19,7 @@ export const ModalSinco: React.FC<ModalProps> = ({
     onAccept,
     title,
     description,
-    state,
+    state = "info",
     bgIcon,
     ...props
 }) => {
@@ -55,6 +55,7 @@ export const ModalSinco: React.FC<ModalProps> = ({
                     <Stack direction="row" alignItems="center" p={1} gap={1.5}>
                         <Box>
                             <Icon color={color} sx={{
+                                // @ts-ignore
                                 display: "flex", alignItems: "center", justifyContent: "center", borderRadius: "100%", backgroundColor: (theme: Theme) => theme.palette[color]?.[100], width: "36px", height: "36px",
                                 ".MuiSvgIcon-root ": {
                                     width: "25px",

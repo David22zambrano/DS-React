@@ -11,12 +11,10 @@ export const PruebaModal = () => {
     },[])
 
     const manejoCancelar =  useCallback(() => {
-        console.log('Acción de cancelar');
         setOpen(prev => !prev);
     },[])
 
     const manejoAceptar = useCallback(() => {
-        console.log('Acción de aceptar');
         setOpen(prev => !prev);
     },[])
 
@@ -33,6 +31,7 @@ export const PruebaModal = () => {
                 // description="Esta es la descripción del modal." 
                 state="info" // Tipos del modal "warning" | "error" | "info".
             />
+
         </Box>
     );
 };

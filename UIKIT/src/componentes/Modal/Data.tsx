@@ -1,13 +1,13 @@
 import { Info, Warning } from "@mui/icons-material";
 
 export const stateConfig = {
-    primary: {
-        color: 'primary',
+    info: {
+        color: 'info',
         icon: <Info />,
         defaultDescription: 'Se [sincronizarán] los datos trabajados en modo offline y se [subirán] a los servidores.',
     },
-    error: {
-        color: 'error',
+    delete: {
+        color: 'delete',
         icon: <Info />,
         defaultDescription: '[Elemento específico] [dejará de existir en todos los lugares donde esté en uso]. Esta acción es irreversible.',
     },

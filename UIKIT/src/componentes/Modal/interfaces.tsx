@@ -3,15 +3,15 @@ import { Theme } from "@mui/material";
 export interface ModalIconProps {
     bgIcon: keyof Theme['palette'];
 }
+ type ModalStates = 'info' | 'delete' | 'warning' ;
 
-export interface ModalProps {
+export interface ModalProps  {
     open: boolean;
     onCancel: () => void;
     onAccept: () => void;
     title: string;
     description?: string;
-    state: 'inherit' |'info' | 'delete' | 'warning';
+    state: ModalStates;
     bgIcon?: ModalIconProps;
-
 }
 
