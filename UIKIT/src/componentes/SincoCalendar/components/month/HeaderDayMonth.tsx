@@ -1,6 +1,6 @@
 import { Box, Typography } from "@mui/material";
 import moment from "moment";
-import "moment/locale/es"; 
+// import "moment/locale/es"; 
 moment.locale("es");
 
 export const HeaderDayMonth = ({ date }) => {

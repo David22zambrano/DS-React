@@ -51,7 +51,7 @@ export const EjemploMultiSelect = () => {
         anchorEl={anchorEl}
         onClose={handleClose}
         items={filteredItems}
-        // actions
+        actions
         dense
         getItemLabel={getItemLabel}
       />
