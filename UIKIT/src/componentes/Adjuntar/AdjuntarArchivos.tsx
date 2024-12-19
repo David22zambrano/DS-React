@@ -13,16 +13,17 @@ import {
   SxProps,
   Typography,
 } from "@mui/material";
+import { Cloud } from "@sinco/react";
 
 export interface AdjuntarProps<T> {
   fectuarBaseDeDatos: (archivos: T[]) => void;
-  compacto?: boolean;
+  compact?: boolean;
   estilosPersonalizados?: SxProps;
   transformarArchivo: (archivo: File) => T;
 }
 
 export const AdjuntarArchivo = <T,>({
-  compacto,
+  compact,
   estilosPersonalizados,
   fectuarBaseDeDatos,
   transformarArchivo,
@@ -102,7 +103,7 @@ export const AdjuntarArchivo = <T,>({
       <Stack
         id="zona-arrastre"
         alignItems="center"
-        flexDirection={compacto === true ? "row" : "column"}
+        flexDirection={compact === true ? "row" : "column"}
         justifyContent="center"
         bgcolor="transparent"
         width="100%"
@@ -121,19 +122,28 @@ export const AdjuntarArchivo = <T,>({
           ...estilosPersonalizados,
         }}
       >
-        <img src="src/assets/icons/svgs/logoAdjuntarArchivos.svg" />
+        <Cloud color="primary" fontSize="large" />
         <input
           type="file"
           multiple
           onChange={(e) => manejarSeleccionDeArchivos(e.target.files)}
           style={{ display: "none" }}
         />
+        <Typography variant="body2" color="text.secondary" id="TipoArchivo">
+          Arrastra o adjunta archivos
+        </Typography>
+        <Typography variant="caption" color="text.secondary">
+          DOCX, XML, PNG, JPG ° {" "}
+          <Typography variant="caption" color="text.secondary" id="PesoArchivo">
+            Máx. 00MB
+          </Typography>
+        </Typography>
         <Button
           size="small"
-          startIcon={<AttachFile fontSize="inherit" />}
+          startIcon={<AttachFile fontSize="small" />}
           component="label"
         >
-          Adjuntar Archivos
+          Adjuntar
           <input
             type="file"
             hidden
@@ -141,9 +151,6 @@ export const AdjuntarArchivo = <T,>({
             onChange={(e) => manejarSeleccionDeArchivos(e.target.files)}
           />
         </Button>
-        <Typography variant="body2" color="text.secondary">
-          Arrastrar o adjuntar archivos
-        </Typography>
       </Stack>
 
       <Stack id="informacion" width="100%" height="auto" gap={1} sx={{ overflowY: "auto" }}>

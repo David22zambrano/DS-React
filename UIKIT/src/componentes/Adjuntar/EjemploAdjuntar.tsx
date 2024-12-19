@@ -22,7 +22,7 @@ export const EjemploAdjuntar = () => {
 
   return (
     <AdjuntarArchivo<MiArchivo>
-      // compacto
+      // compact
       fectuarBaseDeDatos={manejarArchivos}
       transformarArchivo={transformarArchivo}
     />

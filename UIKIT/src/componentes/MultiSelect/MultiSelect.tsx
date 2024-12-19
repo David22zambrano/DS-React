@@ -1,5 +1,5 @@
 import React, { useCallback, useState } from "react";
-import { Button, Checkbox, IconButton, InputAdornment, ListItemIcon, MenuItem, OutlinedInput, Popover, Stack } from "@mui/material";
+import { Button, Checkbox, InputAdornment, ListItemIcon, MenuItem, OutlinedInput, Popover, Stack } from "@mui/material";
 import { SearchOutlined } from "@mui/icons-material";
 
 export interface MultiSelectProps<T> {
@@ -13,17 +13,17 @@ export interface MultiSelectProps<T> {
     handleFilter?: (items: T[], filterValue: string) => T[];
     getItemLabel: (item: T) => string;
     filtrarDesdeComponente?: boolean;
-    OnChangeLimpiar?: () => {};
-    OnClickLimpiar?: () => {},
-    OnChangeAplicar?: () => {};
-    OnClickAplicar?: () => {},
+    OnChangeLimpiar?: () => void;
+    OnClickLimpiar?: () => void;
+    OnChangeAplicar?: () => void;
+    OnClickAplicar?: () => void;
 }
 
 export function MultiSelect<T>({
     items,
     topPanel,
     actions,
-    dense,
+    dense = false,
     anchorEl,
     open,
     onClose,
@@ -80,14 +80,13 @@ export function MultiSelect<T>({
             onClose={onClose}
         >
             <Stack height="auto" minWidth="320px">
-                <Stack height="auto" py={2} px={1}>
+                <Stack height="auto" py={1} px={2}>
                     {topPanel ? (
                         React.cloneElement(topPanel as React.ReactElement, {
                             setFilterValue
                         })
                     ) : (
                         <OutlinedInput
-                        
                             fullWidth
                             size="small"
                             placeholder="Buscar"
@@ -104,7 +103,7 @@ export function MultiSelect<T>({
 
                 <Stack height="auto" maxHeight="300px" overflow="auto">
                     {sortedFilteredItems.length > 2 && (
-                        <MenuItem dense={dense} onClick={handleSelectAll}>
+                        <MenuItem  dense={dense} onClick={handleSelectAll}>
                             <ListItemIcon>
                                 <Checkbox checked={allSelected} />
                             </ListItemIcon>
@@ -114,7 +113,7 @@ export function MultiSelect<T>({
 
                     {sortedFilteredItems.length > 0 ? (
                         sortedFilteredItems.map((item) => (
-                            <MenuItem dense={dense} key={getItemLabel(item)} onClick={() => handleCheckboxChange(item)}>
+                            <MenuItem key={getItemLabel(item)}  dense={dense} onClick={() => handleCheckboxChange(item)}>
                                 <ListItemIcon>
                                     <Checkbox checked={selectedItems.includes(item)} />
                                 </ListItemIcon>
@@ -126,7 +125,7 @@ export function MultiSelect<T>({
                     )}
                 </Stack>
                 {actions && (
-                    <Stack px={1} py={2} flexDirection={"row"} justifyContent={"space-between"} >
+                    <Stack px={2} py={1} flexDirection={"row"} justifyContent={"space-between"} >
                         <Button color="primary" variant="text" onChange={OnChangeLimpiar} onClick={OnClickLimpiar}>Limpiar</Button>
                         <Button variant="contained" color="primary" onChange={OnChangeAplicar} onClick={OnClickAplicar}>Aplicar</Button>
                     </Stack>

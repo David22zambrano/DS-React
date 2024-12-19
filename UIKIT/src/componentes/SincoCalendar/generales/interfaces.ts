@@ -18,7 +18,7 @@ export interface SincoCalendarProps {
         end: stringOrDate;
         slots: Date[];
     }) => void;
-    // onDrillDown?: (view: Views) => void;
+    onDrillDown?: (view: Views) => void;
     [key: string]: any;
 };
 

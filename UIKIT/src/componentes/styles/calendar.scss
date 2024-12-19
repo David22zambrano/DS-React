@@ -1,86 +1,157 @@
 @import 'react-big-calendar/lib/css/react-big-calendar.css';
+/* Estilos exclusivos para la vista de mes */
 
-/* Estilos globales */
-body {
-  margin: 0;
-}
-
-/* Estilos de los eventos */
-.rbc-event {
+/* Evento */
+.rbc-month-view .rbc-event {
   background-color: transparent !important;
   box-shadow: transparent !important;
 }
 
-/* Estilos del calendario general */
-.rbc-calendar {
+/* Calendario */
+.rbc-month-view .rbc-calendar {
   border: none;
 }
 
-/* Estilos del header del calendario (toolbar) */
-.rbc-header {
+/* Header del calendario (toolbar) */
+.rbc-month-view .rbc-header {
   border-bottom: 2px solid white;
 }
 
-.rbc-month-header {
+/* Header mensual */
+.rbc-month-view .rbc-month-header {
   border-left: none !important;
 }
 
-/* Vista mensual: contenedor de días */
+/* Contenedor de días de la vista mensual */
 .rbc-month-view {
   border: 1px solid white;
 }
 
-/* Bordes entre filas de la vista mensual */
-.rbc-month-row+.rbc-month-row {
+/* Bordes de cada fila en la vista mensual */
+.rbc-month-view .rbc-month-row + .rbc-month-row {
   border-left: none !important;
   border-top: 4px solid transparent;
 }
 
-/* Estilos de cada fila de la vista mensual */
-.rbc-row-bg {
+/* Estilos de cada fila */
+.rbc-month-view .rbc-row-bg {
   gap: 4px;
 }
 
-/* Estilo para el día actual */
-.rbc-today {
+/* Día actual */
+.rbc-month-view .rbc-today {
   background-color: black;
 }
 
-/* Fondo y bordes de cada contenedor de día */
-.rbc-day-bg {
+/* Fondo de cada contenedor de día */
+.rbc-month-view .rbc-day-bg {
   background-color: #fbfbfb;
   border-radius: 4px;
   gap: 4px;
   border: none !important;
 }
 
-/* Bordes entre los headers de cada columna */
-.rbc-header+.rbc-header {
+/* Borde de fila */
+.rbc-month-view .rbc-header + .rbc-header {
   border: none !important;
 }
 
 /* Celda seleccionada */
-.rbc-selected-cell {
-  background-color: #F5F5F6;
+.rbc-month-view .rbc-selected-cell {
+  background-color: red;
 }
 
 /* Celdas fuera del rango del mes actual */
-.rbc-off-range-bg {
-  background-color: #F5F5F6;
+.rbc-month-view .rbc-off-range-bg {
+  background-color: burlywood;
   border-radius: 4px;
 }
 
 /* Cada contenedor de cada día del mes */
-.rbc-date-cell {
+.rbc-month-view .rbc-date-cell {
   border-radius: 4px;
-  display: flex;
-  justify-content: flex-end;
-  flex-direction: row-reverse;
-  padding: 4px;
-
-  /* Estilo específico para el día actual dentro del mes */
-
 }
-.rbc-now .rbc-current {
+
+/* Día actual dentro de las celdas de la fecha */
+.rbc-month-view .rbc-date-cell .rbc-now .rbc-current {
   background-color: blue;
 }
+
+// body {
+//   margin: 0;
+// }
+
+// // Estilos del evebnto
+// .rbc-event {
+//   background-color: transparent !important;
+//   box-shadow: transparent !important;
+// }
+
+// //Calendario  
+// .rbc-calendar {
+//   border: none;
+// }
+
+// //Header Del calendario ( toolbar )
+// .rbc-header {
+//   border-bottom: 2px solid white;
+// }
+
+// .rbc-month-header {
+//   border-left: none !important;
+// }
+
+// //Vista mensual contenedor de dias.
+// .rbc-month-view {
+//   border: 1px solid white;
+// }
+
+// // Bordes de cada fila de mi vista mensual
+// .rbc-month-row+.rbc-month-row {
+//   border-left: none !important;
+//   border-top: 4px solid transparent;
+// }
+
+// //estilos de cada fila 
+// .rbc-row-bg {
+//   gap: 4px;
+// }
+
+// // dia actual
+// .rbc-today {
+//   background-color: black;
+// }
+
+// //Color fondo de cada contenedor de dia.
+// .rbc-day-bg {
+//   background-color: #fbfbfb;
+//   border-radius: 4px;
+//   gap: 4px;
+//   border: none !important;
+// }
+
+// //Borde de fila 
+// .rbc-header+.rbc-header {
+//   border: none !important;
+// }
+
+// //celda seleccionada
+// .rbc-selected-cell {
+//   background-color: red;
+// }
+
+// //Celda fuera de rango del mes mostrado actualmente.
+// .rbc-off-range-bg {
+//   background-color: burlywood;
+//   border-radius: 4px;
+// }
+
+// // Cada contenedor de cada dia del mes
+// .rbc-date-cell {
+//   border-radius: 4px;
+
+//   &>.rbc-now .rbc-current {
+//     background-color: blue ;
+
+//   }
+// }

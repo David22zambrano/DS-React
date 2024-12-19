@@ -61,13 +61,46 @@ export function SincoCalendar({
             dateHeader: DateHeader,
             event: Evento as React.FC<EventProps<MyEvent>>,
         },
+        week: {
+
+        }
     }), []);
 
     return (
         <Calendar
             culture="es"
             localizer={localizer}
-            events={repeatedEvents}
+            // events={repeatedEvents}
+            events={[
+                {
+                    id: 0,
+                    title: 'My Event',
+                    start: new Date('2024-12-18T13:45:00-05:00'),
+                    end: new Date('2024-12-18T14:00:00-05:00')
+
+                    // start: moment().add(1, 'days').set({ hour: 10, minute: 0 }).toDate(),
+                    // end: moment().add(2, 'days').set({ hour: 23, minute: 0 }).toDate(),
+                },
+                {
+                    id: 2,
+                    title: 'PRueba 2',
+                    start: new Date('2024-12-18T16:45:00-05:00'),
+                    end: new Date('2024-12-18T18:00:00-05:00')
+                    // desc: 'Big conference for important people',
+                },
+                // {
+                //   id: 1,
+                //   title: 'Presentación de resultados',
+                //   start: moment().add(1, 'days').set({ hour: 14, minute: 0 }).toDate(),
+                //   end: moment().add(3, 'days').set({ hour: 15, minute: 0 }).toDate(),
+                // },
+                // {
+                //   id: 2,
+                //   title: 'Presentación',
+                //   start: moment().add(1, 'days').set({ hour: 14, minute: 30 }).toDate(),
+                //   end: moment().set({ hour: 16, minute: 0 }).toDate(),
+                // },
+            ]}
             startAccessor={startAccessor}
             endAccessor={endAccessor}
             titleAccessor={titleAccessor}
