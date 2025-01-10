@@ -19,7 +19,7 @@ export interface AdjuntarProps<T> {
   compact?: boolean;
   sx?: SxProps;
   error?: boolean;
-  archivoDetalles?: {
+  detallesArchivo?: {
     tipoArchivo: string;
     pesoMaximo: string;
   };
@@ -32,7 +32,7 @@ export const AdjuntarArchivo = <T,>({
   sx,
   error,
   guardarArchivo,
-  archivoDetalles = { tipoArchivo: 'DOCX, XML, PNG, JPG', pesoMaximo: 'Máx. 00MB' },
+  detallesArchivo = { tipoArchivo: 'DOCX, XML, PNG, JPG', pesoMaximo: 'Máx. 00MB' },
   transformarArchivo,
 }: AdjuntarProps<T>) => {
   const [archivos, setArchivos] = useState<
@@ -140,9 +140,9 @@ export const AdjuntarArchivo = <T,>({
               Arrastra o adjunta archivos
             </Typography>
             <Typography variant="caption" color={error ? "error" : "text.secondary"}>
-              {archivoDetalles.tipoArchivo}
+              {detallesArchivo.tipoArchivo}
               <Typography variant="caption" color={error ? "error" : "text.secondary"} id="PesoArchivo">
-                {archivoDetalles.pesoMaximo}
+                {detallesArchivo.pesoMaximo}
               </Typography>
             </Typography>
           </Box>

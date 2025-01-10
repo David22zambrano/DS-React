@@ -22,8 +22,10 @@ export const EjemploAdjuntar = () => {
 
   return (
     <AdjuntarArchivo<MiArchivo>
+      error={false} // si es true pues ves como se ve en modo error.
       // compact
-      fectuarBaseDeDatos={manejarArchivos}
+      // detallesArchivo={{tipoArchivo: "Aqui iria los tipos de archivo que vayan usar", pesoMaximo: "el peso maximo que vayan usar"}}
+      guardarArchivo={manejarArchivos}
       transformarArchivo={transformarArchivo}
     />
   );
