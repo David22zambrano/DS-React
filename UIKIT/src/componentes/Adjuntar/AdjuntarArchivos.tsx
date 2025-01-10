@@ -126,8 +126,11 @@ export const AdjuntarArchivo = <T,>({
       >
         <Stack alignItems={"center"} flexDirection={compact ? "row" : "column"} gap={1.5}>
           <Box borderRadius={"100%"}>
-            <CloudUploadOutlined fontSize="medium" color="error"
-            />
+            <CloudUploadOutlined fontSize="medium"
+              sx={{
+                color: error ? "error" : "primary"
+              }} />
+
           </Box>
           <input
             type="file"
@@ -136,7 +139,7 @@ export const AdjuntarArchivo = <T,>({
             style={{ display: "none" }}
           />
           <Box flexDirection={"column"} >
-            <Typography variant="body2" color={error ? "error" : "text.secondary"} id="TipoArchivo">
+            <Typography variant="body2" id="TipoArchivo">
               Arrastra o adjunta archivos
             </Typography>
             <Typography variant="caption" color={error ? "error" : "text.secondary"}>

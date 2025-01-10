@@ -1,9 +1,9 @@
 import moment from "moment"
 import { EjemploAdjuntar, EjemploMultiSelect } from "./componentes"
-import { PruebaModal } from "./componentes/Modal"
-import { SincoCalendar } from "./componentes/SincoCalendar/SincoCalendar"
+// import { SincoCalendar } from "./componentes/SincoCalendar/SincoCalendar"
 import { Button, Stack } from "@mui/material"
 import { PageHeader } from "@sinco/react"
+import { PruebaModal } from "./componentes/Modal/EjemploModal"
 
 // TIPS:
 
