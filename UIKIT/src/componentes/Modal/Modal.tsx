@@ -3,7 +3,6 @@ import {
     Modal,
     Box,
     Typography,
-    Icon,
     IconButton,
     Button,
     Stack,
@@ -13,16 +12,16 @@ import { Close } from '@mui/icons-material';
 import { stateConfig } from './Data';
 import { ModalProps } from './interfaces';
 
-export const ModalSinco: React.FC<ModalProps> = ({
+export const ModalSinco = ({
     open,
     onCancel,
     onAccept,
     title,
     description,
     state = "info",
-    bgIcon,
     ...props
-}) => {
+}: ModalProps) => {
+
     const [openModal, setOpenModal] = useState(open);
 
     useEffect(() => {
@@ -33,7 +32,7 @@ export const ModalSinco: React.FC<ModalProps> = ({
         setOpenModal(prev => !prev);
     }, []);
 
-    const { color, icon, defaultDescription } = stateConfig[state];
+    const { color, icon, defaultDescription } = stateConfig["info"];
 
     return (
         <Modal open={openModal} onClose={handleModal} {...props} sx={{
@@ -53,15 +52,8 @@ export const ModalSinco: React.FC<ModalProps> = ({
             >
                 <Stack direction="row" justifyContent="space-between" alignItems="center" >
                     <Stack direction="row" alignItems="center" p={1} gap={1.5}>
-                        <Box>
-                            <Icon color={color} sx={{
-                                // @ts-ignore
-                                display: "flex", alignItems: "center", justifyContent: "center", borderRadius: "100%", backgroundColor: (theme: Theme) => theme.palette[color]?.[100], width: "36px", height: "36px",
-                                ".MuiSvgIcon-root ": {
-                                    width: "25px",
-                                    height: "25px"
-                                }
-                            }}>{icon}</Icon>
+                        <Box display="flex" alignItems="center">
+                            {icon}
                         </Box>
                         <Typography variant="h6" color="text.primary" >{title}</Typography>
                     </Stack>
@@ -80,7 +72,17 @@ export const ModalSinco: React.FC<ModalProps> = ({
                     <Button size="small" variant="text" color="inherit" onClick={onCancel}>
                         Cancelar
                     </Button>
-                    <Button size="small" variant="contained" color={color} onClick={onAccept}>
+                    <Button size="small" variant="contained" onClick={onAccept}
+                        sx={{
+                            backgroundColor: (theme: Theme) =>
+                                color === "info"
+                                    ? theme.palette.info.main
+                                    : color === "delete"
+                                        ? theme.palette.error.main
+                                        : color === "warning"
+                                            ? theme.palette.warning.main
+                                            : theme.palette.grey[200],
+                        }} >
                         Aceptar
                     </Button>
                 </Stack>

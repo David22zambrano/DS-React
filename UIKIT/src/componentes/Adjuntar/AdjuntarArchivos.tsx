@@ -1,6 +1,7 @@
 import { useState, useEffect, useCallback } from "react";
 import {
   AttachFile,
+  CloudUploadOutlined,
   DeleteOutline,
   UploadFileOutlined,
 } from "@mui/icons-material";
@@ -13,19 +14,25 @@ import {
   SxProps,
   Typography,
 } from "@mui/material";
-import { Cloud } from "@sinco/react";
 
 export interface AdjuntarProps<T> {
-  fectuarBaseDeDatos: (archivos: T[]) => void;
   compact?: boolean;
-  estilosPersonalizados?: SxProps;
+  sx?: SxProps;
+  error?: boolean;
+  archivoDetalles?: {
+    tipoArchivo: string;
+    pesoMaximo: string;
+  };
+  guardarArchivo: (archivos: T[]) => void;
   transformarArchivo: (archivo: File) => T;
 }
 
 export const AdjuntarArchivo = <T,>({
   compact,
-  estilosPersonalizados,
-  fectuarBaseDeDatos,
+  sx,
+  error,
+  guardarArchivo,
+  archivoDetalles = { tipoArchivo: 'DOCX, XML, PNG, JPG', pesoMaximo: 'Máx. 00MB' },
   transformarArchivo,
 }: AdjuntarProps<T>) => {
   const [archivos, setArchivos] = useState<
@@ -76,12 +83,6 @@ export const AdjuntarArchivo = <T,>({
     [setArchivos]
   );
 
-  const manejarAdjuntarArchivos = (evento: React.MouseEvent) => {
-    evento.stopPropagation();
-    fectuarBaseDeDatos(archivos.map((e) => e.transformado));
-    setArchivos([]);
-  };
-
   const manejarSoltarArchivos = (evento: React.DragEvent<HTMLDivElement>) => {
     evento.preventDefault();
     evento.stopPropagation();
@@ -98,19 +99,20 @@ export const AdjuntarArchivo = <T,>({
       alignItems="center"
       bgcolor="transparent"
       height="100%"
-      gap={1}
+    // gap={1.5}
     >
       <Stack
         id="zona-arrastre"
         alignItems="center"
         flexDirection={compact === true ? "row" : "column"}
-        justifyContent="center"
+        justifyContent={compact === true ? "space-between" : "center"}
         bgcolor="transparent"
         width="100%"
         boxShadow={0}
-        gap={1}
+        gap={1.5}
         borderRadius={1}
-        py={3}
+        py={compact ? 1.5 : 3}
+        px={compact ? 1.5 : 2}
         onDrop={manejarSoltarArchivos}
         onDragOver={manejarArrastrarSobreZona}
         sx={{
@@ -119,25 +121,33 @@ export const AdjuntarArchivo = <T,>({
           ":hover": {
             backgroundColor: "action.hover",
           },
-          ...estilosPersonalizados,
+          ...sx,
         }}
       >
-        <Cloud color="primary" fontSize="large" />
-        <input
-          type="file"
-          multiple
-          onChange={(e) => manejarSeleccionDeArchivos(e.target.files)}
-          style={{ display: "none" }}
-        />
-        <Typography variant="body2" color="text.secondary" id="TipoArchivo">
-          Arrastra o adjunta archivos
-        </Typography>
-        <Typography variant="caption" color="text.secondary">
-          DOCX, XML, PNG, JPG ° {" "}
-          <Typography variant="caption" color="text.secondary" id="PesoArchivo">
-            Máx. 00MB
-          </Typography>
-        </Typography>
+        <Stack alignItems={"center"} flexDirection={compact ? "row" : "column"} gap={1.5}>
+          <Box borderRadius={"100%"}>
+            <CloudUploadOutlined fontSize="medium" color="error"
+            />
+          </Box>
+          <input
+            type="file"
+            multiple
+            onChange={(e) => manejarSeleccionDeArchivos(e.target.files)}
+            style={{ display: "none" }}
+          />
+          <Box flexDirection={"column"} >
+            <Typography variant="body2" color={error ? "error" : "text.secondary"} id="TipoArchivo">
+              Arrastra o adjunta archivos
+            </Typography>
+            <Typography variant="caption" color={error ? "error" : "text.secondary"}>
+              {archivoDetalles.tipoArchivo}
+              <Typography variant="caption" color={error ? "error" : "text.secondary"} id="PesoArchivo">
+                {archivoDetalles.pesoMaximo}
+              </Typography>
+            </Typography>
+          </Box>
+        </Stack>
+
         <Button
           size="small"
           startIcon={<AttachFile fontSize="small" />}
