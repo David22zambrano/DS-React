@@ -1,6 +1,7 @@
 import { useState, useEffect, useCallback } from "react";
 import {
   AttachFile,
+  CloudUploadOutlined,
   DeleteOutline,
   UploadFileOutlined,
 } from "@mui/icons-material";
@@ -15,16 +16,23 @@ import {
 } from "@mui/material";
 
 export interface AdjuntarProps<T> {
-  fectuarBaseDeDatos: (archivos: T[]) => void;
-  compacto?: boolean;
-  estilosPersonalizados?: SxProps;
+  compact?: boolean;
+  sx?: SxProps;
+  error?: boolean;
+  detallesArchivo?: {
+    tipoArchivo: string;
+    pesoMaximo: string;
+  };
+  guardarArchivo: (archivos: T[]) => void;
   transformarArchivo: (archivo: File) => T;
 }
 
 export const AdjuntarArchivo = <T,>({
-  compacto,
-  estilosPersonalizados,
-  fectuarBaseDeDatos,
+  compact,
+  sx,
+  error,
+  guardarArchivo,
+  detallesArchivo = { tipoArchivo: 'DOCX, XML, PNG, JPG', pesoMaximo: 'Máx. 00MB' },
   transformarArchivo,
 }: AdjuntarProps<T>) => {
   const [archivos, setArchivos] = useState<
@@ -75,12 +83,6 @@ export const AdjuntarArchivo = <T,>({
     [setArchivos]
   );
 
-  const manejarAdjuntarArchivos = (evento: React.MouseEvent) => {
-    evento.stopPropagation();
-    fectuarBaseDeDatos(archivos.map((e) => e.transformado));
-    setArchivos([]);
-  };
-
   const manejarSoltarArchivos = (evento: React.DragEvent<HTMLDivElement>) => {
     evento.preventDefault();
     evento.stopPropagation();
@@ -97,19 +99,20 @@ export const AdjuntarArchivo = <T,>({
       alignItems="center"
       bgcolor="transparent"
       height="100%"
-      gap={1}
+    // gap={1.5}
     >
       <Stack
         id="zona-arrastre"
         alignItems="center"
-        flexDirection={compacto === true ? "row" : "column"}
-        justifyContent="center"
+        flexDirection={compact === true ? "row" : "column"}
+        justifyContent={compact === true ? "space-between" : "center"}
         bgcolor="transparent"
         width="100%"
         boxShadow={0}
-        gap={1}
+        gap={1.5}
         borderRadius={1}
-        py={3}
+        py={compact ? 1.5 : 3}
+        px={compact ? 1.5 : 2}
         onDrop={manejarSoltarArchivos}
         onDragOver={manejarArrastrarSobreZona}
         sx={{
@@ -118,22 +121,42 @@ export const AdjuntarArchivo = <T,>({
           ":hover": {
             backgroundColor: "action.hover",
           },
-          ...estilosPersonalizados,
+          ...sx,
         }}
       >
-        <img src="src/assets/icons/svgs/logoAdjuntarArchivos.svg" />
-        <input
-          type="file"
-          multiple
-          onChange={(e) => manejarSeleccionDeArchivos(e.target.files)}
-          style={{ display: "none" }}
-        />
+        <Stack alignItems={"center"} flexDirection={compact ? "row" : "column"} gap={1.5}>
+          <Box borderRadius={"100%"}>
+            <CloudUploadOutlined fontSize="medium"
+              sx={{
+                color: error ? "error" : "primary"
+              }} />
+
+          </Box>
+          <input
+            type="file"
+            multiple
+            onChange={(e) => manejarSeleccionDeArchivos(e.target.files)}
+            style={{ display: "none" }}
+          />
+          <Box flexDirection={"column"} >
+            <Typography variant="body2" id="TipoArchivo">
+              Arrastra o adjunta archivos
+            </Typography>
+            <Typography variant="caption" color={error ? "error" : "text.secondary"}>
+              {detallesArchivo.tipoArchivo}
+              <Typography variant="caption" color={error ? "error" : "text.secondary"} id="PesoArchivo">
+                {detallesArchivo.pesoMaximo}
+              </Typography>
+            </Typography>
+          </Box>
+        </Stack>
+
         <Button
           size="small"
-          startIcon={<AttachFile fontSize="inherit" />}
+          startIcon={<AttachFile fontSize="small" />}
           component="label"
         >
-          Adjuntar Archivos
+          Adjuntar
           <input
             type="file"
             hidden
@@ -141,9 +164,6 @@ export const AdjuntarArchivo = <T,>({
             onChange={(e) => manejarSeleccionDeArchivos(e.target.files)}
           />
         </Button>
-        <Typography variant="body2" color="text.secondary">
-          Arrastrar o adjuntar archivos
-        </Typography>
       </Stack>
 
       <Stack id="informacion" width="100%" height="auto" gap={1} sx={{ overflowY: "auto" }}>
