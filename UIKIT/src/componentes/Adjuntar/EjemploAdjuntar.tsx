@@ -22,8 +22,9 @@ export const EjemploAdjuntar = () => {
 
   return (
     <AdjuntarArchivo<MiArchivo>
-      // compacto
-      fectuarBaseDeDatos={manejarArchivos}
+      // compact
+      error={true}
+      guardarArchivo={manejarArchivos}
       transformarArchivo={transformarArchivo}
     />
   );
