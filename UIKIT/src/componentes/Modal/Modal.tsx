@@ -32,7 +32,7 @@ export const ModalSinco = ({
         setOpenModal(prev => !prev);
     }, []);
 
-    const { color, icon, defaultDescription } = stateConfig["info"];
+    const { color, icon, defaultDescription } = stateConfig[state];
 
     return (
         <Modal open={openModal} onClose={handleModal} {...props} sx={{

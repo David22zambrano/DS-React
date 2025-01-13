@@ -1,5 +1,5 @@
 import React, { useCallback, useState } from "react";
-import { Button, Checkbox, InputAdornment, ListItemIcon, MenuItem, OutlinedInput, Popover, Stack } from "@mui/material";
+import { Button, Checkbox, Divider, InputAdornment, ListItemIcon, MenuItem, OutlinedInput, Popover, Stack } from "@mui/material";
 import { SearchOutlined } from "@mui/icons-material";
 
 export interface MultiSelectProps<T> {
@@ -114,6 +114,7 @@ export function MultiSelect<T>({
                     {sortedFilteredItems.length > 0 ? (
                         sortedFilteredItems.map((item) => (
                             <MenuItem key={getItemLabel(item)}  dense={dense} onClick={() => handleCheckboxChange(item)}>
+                                <Divider />
                                 <ListItemIcon>
                                     <Checkbox checked={selectedItems.includes(item)} />
                                 </ListItemIcon>

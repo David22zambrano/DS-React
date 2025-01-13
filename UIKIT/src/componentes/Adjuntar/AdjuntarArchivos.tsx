@@ -1,6 +1,7 @@
 import { useState, useEffect, useCallback } from "react";
 import {
   AttachFile,
+  CloseOutlined,
   CloudUploadOutlined,
   DeleteOutline,
   UploadFileOutlined,
@@ -99,7 +100,6 @@ export const AdjuntarArchivo = <T,>({
       alignItems="center"
       bgcolor="transparent"
       height="100%"
-    // gap={1.5}
     >
       <Stack
         id="zona-arrastre"
@@ -116,19 +116,22 @@ export const AdjuntarArchivo = <T,>({
         onDrop={manejarSoltarArchivos}
         onDragOver={manejarArrastrarSobreZona}
         sx={{
-          border: (theme) => `1px dashed ${theme.palette.grey[500]}`,
+          border: error
+            ? (theme) => `1px solid ${theme.palette.error.main}`
+            : (theme) => `1px dashed ${theme.palette.grey[500]}`,
           cursor: "pointer",
           ":hover": {
-            backgroundColor: "action.hover",
+            backgroundColor: error ? (theme) => theme.palette.error[50] : "action.hover",
           },
           ...sx,
         }}
       >
         <Stack alignItems={"center"} flexDirection={compact ? "row" : "column"} gap={1.5}>
           <Box borderRadius={"100%"}>
-            <CloudUploadOutlined fontSize="medium"
+            <CloudUploadOutlined fontSize="medium" color="primary"
               sx={{
-                color: error ? "error" : "primary"
+                color: error ? "error" : "primary",
+                fill: error ? "error" : "primary",
               }} />
 
           </Box>
@@ -139,11 +142,11 @@ export const AdjuntarArchivo = <T,>({
             style={{ display: "none" }}
           />
           <Box flexDirection={"column"} >
-            <Typography variant="body2" id="TipoArchivo">
+            <Typography variant="body2" id="TipoArchivo" color="text.primary" textAlign={"center"}>
               Arrastra o adjunta archivos
             </Typography>
             <Typography variant="caption" color={error ? "error" : "text.secondary"}>
-              {detallesArchivo.tipoArchivo}
+              {detallesArchivo.tipoArchivo} •  {" "}
               <Typography variant="caption" color={error ? "error" : "text.secondary"} id="PesoArchivo">
                 {detallesArchivo.pesoMaximo}
               </Typography>
@@ -185,7 +188,7 @@ export const AdjuntarArchivo = <T,>({
                 <UploadFileOutlined color="primary" fontSize="small" />
 
                 <Stack flexDirection="column" width="100%">
-                  <Typography variant="body2" color="text.primary">
+                  <Typography variant="body2" color="text.primary" >
                     {archivo.name}
                   </Typography>
                   <Typography
@@ -212,9 +215,20 @@ export const AdjuntarArchivo = <T,>({
               </Stack>
             </Stack>
             <Box display="flex" justifyContent={"center"} alignItems="center">
-              <IconButton size="medium" onClick={() => eliminarArchivo(indice)}>
-                <DeleteOutline fontSize="small" color="action" />
-              </IconButton>
+              {!cargaCompleta ? (
+                <Stack direction="row" spacing={1}>
+                  <IconButton size="small" onClick={() => eliminarArchivo(indice)}>
+                    <CloseOutlined fontSize="small" color="action" />
+                  </IconButton>
+                  <IconButton size="small" onClick={() => eliminarArchivo(indice)}>
+                    <CloudUploadOutlined fontSize="small" color="primary" />
+                  </IconButton>
+                </Stack>
+              ) : (
+                <IconButton size="medium" onClick={() => eliminarArchivo(indice)}>
+                  <DeleteOutline fontSize="small" color="action" />
+                </IconButton>
+              )}
             </Box>
           </Stack>
         ))}
