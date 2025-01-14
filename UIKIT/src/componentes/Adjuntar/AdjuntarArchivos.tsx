@@ -2,23 +2,19 @@ import { useState, useEffect, useCallback } from "react";
 import {
   AttachFile,
   CancelOutlined,
-  CloseOutlined,
   CloudUploadOutlined,
   DeleteOutline,
   UploadFileOutlined,
 } from "@mui/icons-material";
 import {
-  alpha,
   Box,
   Button,
   IconButton,
   LinearProgress,
   Stack,
   SxProps,
-  Theme,
   Typography,
 } from "@mui/material";
-import { Evento } from "../SincoCalendar";
 
 export interface AdjuntarProps<T> {
   compact?: boolean;
@@ -220,12 +216,6 @@ export const AdjuntarArchivo = <T,>({
                       : `${new Date().toLocaleDateString()} • ${Math.round(
                         archivo.size / 1024
                       )} KB`}
-                    {/* {cargaCompleta 
-                      ? `${new Date().toLocaleDateString()} • ${Math.round(
-                        archivo.size / 1024
-                      )} KB`
-                      : `Cargando... • ${Math.round(archivo.size / 1024)} KB`
-                    } */}
                   </Typography>
                   {!cargaCompleta && (
                     <LinearProgress

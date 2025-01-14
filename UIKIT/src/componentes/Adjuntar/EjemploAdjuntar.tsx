@@ -9,9 +9,11 @@ interface MiArchivo {
   tamano: number;
 }
 
-export const EjemploAdjuntar = () => {
 
-  const [error, setError] = useState(true);
+export const EjemploAdjuntar = () => {
+  
+  // El estado de error esta por defecto en estado false si se desea ver la vista en modo error debe cambiar este valor a true
+  const [error, setError] = useState(false);
 
   const transformarArchivo = (file: File): MiArchivo => ({
     id: file.lastModified.toString(),
