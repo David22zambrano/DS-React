@@ -1,20 +1,24 @@
 import { useState, useEffect, useCallback } from "react";
 import {
   AttachFile,
+  CancelOutlined,
   CloseOutlined,
   CloudUploadOutlined,
   DeleteOutline,
   UploadFileOutlined,
 } from "@mui/icons-material";
 import {
+  alpha,
   Box,
   Button,
   IconButton,
   LinearProgress,
   Stack,
   SxProps,
+  Theme,
   Typography,
 } from "@mui/material";
+import { Evento } from "../SincoCalendar";
 
 export interface AdjuntarProps<T> {
   compact?: boolean;
@@ -24,6 +28,12 @@ export interface AdjuntarProps<T> {
     tipoArchivo: string;
     pesoMaximo: string;
   };
+  detallesAdjunto?: {
+    tipoArchivo: string;
+    pesoMaximo: string;
+  }
+  onChangeAdjuntar?: () => void;
+  onClickAdjuntar?: () => void;
   guardarArchivo: (archivos: T[]) => void;
   transformarArchivo: (archivo: File) => T;
 }
@@ -33,7 +43,10 @@ export const AdjuntarArchivo = <T,>({
   sx,
   error,
   guardarArchivo,
+  onChangeAdjuntar,
+  onClickAdjuntar,
   detallesArchivo = { tipoArchivo: 'DOCX, XML, PNG, JPG', pesoMaximo: 'Máx. 00MB' },
+  detallesAdjunto,
   transformarArchivo,
 }: AdjuntarProps<T>) => {
   const [archivos, setArchivos] = useState<
@@ -112,37 +125,34 @@ export const AdjuntarArchivo = <T,>({
         gap={1.5}
         borderRadius={1}
         py={compact ? 1.5 : 3}
-        px={compact ? 1.5 : 2}
+        px={compact ? 1.5 : 0}
         onDrop={manejarSoltarArchivos}
         onDragOver={manejarArrastrarSobreZona}
+        onClick={() => document.getElementById("input-archivos")?.click()}
         sx={{
           border: error
             ? (theme) => `1px solid ${theme.palette.error.main}`
             : (theme) => `1px dashed ${theme.palette.grey[500]}`,
           cursor: "pointer",
           ":hover": {
-            backgroundColor: error ? (theme) => theme.palette.error[50] : "action.hover",
+            backgroundColor: error
+              ? "#D143430A"
+              : "action.hover",
           },
           ...sx,
         }}
+
       >
         <Stack alignItems={"center"} flexDirection={compact ? "row" : "column"} gap={1.5}>
-          <Box borderRadius={"100%"}>
+          <Box
+            display={"flex"} justifyContent={"center"} alignItems={"center"} borderRadius={"100%"} width={"36px"} height={"36px"} bgcolor={error ? (theme) => theme.palette.error[50] : (theme) => theme.palette.primary[50]}>
             <CloudUploadOutlined fontSize="medium" color="primary"
               sx={{
-                color: error ? "error" : "primary",
-                fill: error ? "error" : "primary",
+                color: error ? (theme) => theme.palette.error.main : (theme) => theme.palette.primary.main,
               }} />
-
           </Box>
-          <input
-            type="file"
-            multiple
-            onChange={(e) => manejarSeleccionDeArchivos(e.target.files)}
-            style={{ display: "none" }}
-          />
           <Box flexDirection={"column"} >
-            <Typography variant="body2" id="TipoArchivo" color="text.primary" textAlign={"center"}>
+            <Typography variant="body2" id="TipoArchivo" color="text.primary" textAlign={compact ? "start" : "center"}>
               Arrastra o adjunta archivos
             </Typography>
             <Typography variant="caption" color={error ? "error" : "text.secondary"}>
@@ -152,20 +162,26 @@ export const AdjuntarArchivo = <T,>({
               </Typography>
             </Typography>
           </Box>
+          <input
+            id="input-archivos"
+            type="file"
+            multiple
+            hidden
+            onChange={(e) => manejarSeleccionDeArchivos(e.target.files)}
+          />
         </Stack>
 
         <Button
           size="small"
           startIcon={<AttachFile fontSize="small" />}
           component="label"
+          onClick={(event) => {
+            event.stopPropagation();
+            if (onClickAdjuntar) onClickAdjuntar();
+          }}
+          onChange={onChangeAdjuntar}
         >
           Adjuntar
-          <input
-            type="file"
-            hidden
-            multiple
-            onChange={(e) => manejarSeleccionDeArchivos(e.target.files)}
-          />
         </Button>
       </Stack>
 
@@ -185,22 +201,31 @@ export const AdjuntarArchivo = <T,>({
           >
             <Stack width="100%" alignItems="center" flexDirection="row" gap={2} p={1}>
               <Stack width="100%" flexDirection="row" alignItems="center" gap={0.5}>
-                <UploadFileOutlined color="primary" fontSize="small" />
+                <UploadFileOutlined
+                  fontSize="small"
+                  sx={{ color: error ? (theme) => theme.palette.error[50] : (theme) => theme.palette.primary.main }}
+                />
 
                 <Stack flexDirection="column" width="100%">
                   <Typography variant="body2" color="text.primary" >
                     {archivo.name}
                   </Typography>
                   <Typography
-                    id="estado-carga-completo"
+                    id="estado-carga-completa"
                     variant="caption"
-                    color="text.secondary"
+                    color={error ? "error" : "text.secondary"}
                   >
-                    {cargaCompleta
+                    {cargaCompleta && error && detallesAdjunto
+                      ? `${detallesAdjunto.tipoArchivo} • ${detallesAdjunto.pesoMaximo}`
+                      : `${new Date().toLocaleDateString()} • ${Math.round(
+                        archivo.size / 1024
+                      )} KB`}
+                    {/* {cargaCompleta 
                       ? `${new Date().toLocaleDateString()} • ${Math.round(
                         archivo.size / 1024
                       )} KB`
-                      : `Cargando... • ${Math.round(archivo.size / 1024)} KB`}
+                      : `Cargando... • ${Math.round(archivo.size / 1024)} KB`
+                    } */}
                   </Typography>
                   {!cargaCompleta && (
                     <LinearProgress
@@ -218,10 +243,7 @@ export const AdjuntarArchivo = <T,>({
               {!cargaCompleta ? (
                 <Stack direction="row" spacing={1}>
                   <IconButton size="small" onClick={() => eliminarArchivo(indice)}>
-                    <CloseOutlined fontSize="small" color="action" />
-                  </IconButton>
-                  <IconButton size="small" onClick={() => eliminarArchivo(indice)}>
-                    <CloudUploadOutlined fontSize="small" color="primary" />
+                    <CancelOutlined fontSize="small" color="primary" />
                   </IconButton>
                 </Stack>
               ) : (

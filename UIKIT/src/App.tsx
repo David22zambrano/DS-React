@@ -1,9 +1,11 @@
 import moment from "moment"
 import { EjemploAdjuntar, EjemploMultiSelect } from "./componentes"
 import { SincoCalendar } from "./componentes/SincoCalendar/SincoCalendar"
-import { Button, Stack } from "@mui/material"
+import { Button, IconButton, Stack } from "@mui/material"
 import { PageHeader } from "@sinco/react"
+// import { PageHeader } from "./componentes/PageHeaderT"
 import { PruebaModal } from "./componentes/Modal/EjemploModal"
+import { ArrowLeft, DeleteOutline } from "@mui/icons-material"
 
 // TIPS:
 
@@ -23,16 +25,17 @@ import { PruebaModal } from "./componentes/Modal/EjemploModal"
 function App() {
   return (
     // <Stack alignContent={"center"} justifyContent={"center"} p={2} gap={2} height={"700px"}>
-      <Stack alignContent={"center"} justifyContent={"center"} p={2} gap={2} > 
+    <Stack alignContent={"center"} justifyContent={"center"} p={2} gap={2} >
 
-       <PageHeader
+      {/* <PageHeader
         title="titulo"
-        actions={<Button variant="contained" >Button</Button>}
-      /> 
- 
+        actions={<Button variant="contained" size="small" >Button</Button>} 
+       buttonBack={<IconButton color="primary"><ArrowLeft></ArrowLeft></IconButton>}
+      />*/}
+
       <EjemploAdjuntar />
       <Stack flexDirection={"row"} alignContent={"center"} justifyContent={"center"} p={2} gap={2}>
-        <PruebaModal />
+        {/* <PruebaModal /> */}
         <EjemploMultiSelect />
       </Stack>
 

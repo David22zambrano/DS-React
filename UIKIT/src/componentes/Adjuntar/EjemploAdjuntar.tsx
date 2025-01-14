@@ -1,6 +1,6 @@
 
 // ADJUNTAR ARCHIVOS -------------------------------------------------------
-import React from 'react';
+import React, { useState } from 'react';
 import { AdjuntarArchivo } from './AdjuntarArchivos';
 
 interface MiArchivo {
@@ -10,6 +10,9 @@ interface MiArchivo {
 }
 
 export const EjemploAdjuntar = () => {
+
+  const [error, setError] = useState(true);
+
   const transformarArchivo = (file: File): MiArchivo => ({
     id: file.lastModified.toString(),
     nombre: file.name,
@@ -23,11 +26,18 @@ export const EjemploAdjuntar = () => {
   return (
     <AdjuntarArchivo<MiArchivo>
       // compact
-      error={true}
+      onChangeAdjuntar={() => { }}
+      onClickAdjuntar={() => { }}
+      detallesArchivo={{
+        tipoArchivo: 'DOCX, XML, PNG, JPG ',
+        pesoMaximo: error ? "Archivo no soportado" : "Máx. 00MB"
+      }}
+      detallesAdjunto={{
+        tipoArchivo: "Archivo supero el limite", pesoMaximo: error ? "Carga fallida" : "Máx. 00MB"
+      }}
+      error={error}
       guardarArchivo={manejarArchivos}
       transformarArchivo={transformarArchivo}
     />
   );
 };
-
-

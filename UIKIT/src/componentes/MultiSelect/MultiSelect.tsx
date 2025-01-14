@@ -1,5 +1,5 @@
 import React, { useCallback, useState } from "react";
-import { Button, Checkbox, Divider, InputAdornment, ListItemIcon, MenuItem, OutlinedInput, Popover, Stack } from "@mui/material";
+import { Button, Checkbox, Divider, InputAdornment, ListItemIcon, MenuItem, OutlinedInput, Popover, Stack, Theme } from "@mui/material";
 import { SearchOutlined } from "@mui/icons-material";
 
 export interface MultiSelectProps<T> {
@@ -13,10 +13,10 @@ export interface MultiSelectProps<T> {
     handleFilter?: (items: T[], filterValue: string) => T[];
     getItemLabel: (item: T) => string;
     filtrarDesdeComponente?: boolean;
-    OnChangeLimpiar?: () => void;
-    OnClickLimpiar?: () => void;
-    OnChangeAplicar?: () => void;
-    OnClickAplicar?: () => void;
+    onChangeLimpiar?: () => void;
+    onClickLimpiar?: () => void;
+    onChangeAplicar?: () => void;
+    onClickAplicar?: () => void;
 }
 
 export function MultiSelect<T>({
@@ -29,10 +29,10 @@ export function MultiSelect<T>({
     onClose,
     handleFilter,
     getItemLabel,
-    OnChangeLimpiar,
-    OnClickLimpiar,
-    OnChangeAplicar,
-    OnClickAplicar,
+    onChangeLimpiar,
+    onClickLimpiar,
+    onChangeAplicar,
+    onClickAplicar,
     filtrarDesdeComponente = true,
 }: MultiSelectProps<T>) {
     const [filterValue, setFilterValue] = useState<string>("");
@@ -94,7 +94,7 @@ export function MultiSelect<T>({
                             onChange={handleChangeTextField}
                             endAdornment={
                                 <InputAdornment position="end">
-                                        <SearchOutlined fontSize="small" />
+                                    <SearchOutlined fontSize="small" />
                                 </InputAdornment>
                             }
                         />
@@ -103,8 +103,12 @@ export function MultiSelect<T>({
 
                 <Stack height="auto" maxHeight="300px" overflow="auto">
                     {sortedFilteredItems.length > 2 && (
-                        <MenuItem  dense={dense} onClick={handleSelectAll}>
-                            <ListItemIcon>
+                        <MenuItem dense={dense} onClick={handleSelectAll} color="primary"
+                            sx={{
+                                borderBottom: (theme: Theme) => `1px solid ${theme.palette.divider}`
+                            }}
+                        >
+                            <ListItemIcon >
                                 <Checkbox checked={allSelected} />
                             </ListItemIcon>
                             Todos los items
@@ -113,8 +117,9 @@ export function MultiSelect<T>({
 
                     {sortedFilteredItems.length > 0 ? (
                         sortedFilteredItems.map((item) => (
-                            <MenuItem key={getItemLabel(item)}  dense={dense} onClick={() => handleCheckboxChange(item)}>
-                                <Divider />
+                            <MenuItem key={getItemLabel(item)} dense={dense} onClick={() => handleCheckboxChange(item)}>
+
+
                                 <ListItemIcon>
                                     <Checkbox checked={selectedItems.includes(item)} />
                                 </ListItemIcon>
@@ -126,9 +131,9 @@ export function MultiSelect<T>({
                     )}
                 </Stack>
                 {actions && (
-                    <Stack px={2} py={1} flexDirection={"row"} justifyContent={"space-between"} >
-                        <Button color="primary" variant="text" onChange={OnChangeLimpiar} onClick={OnClickLimpiar}>Limpiar</Button>
-                        <Button variant="contained" color="primary" onChange={OnChangeAplicar} onClick={OnClickAplicar}>Aplicar</Button>
+                    <Stack px={2} py={1} flexDirection={"row"} justifyContent={"space-between"} bgcolor={(theme) => theme.palette.grey[50]}>
+                        <Button color="primary" variant="text" onChange={onChangeLimpiar} onClick={onClickLimpiar}>Limpiar</Button>
+                        <Button variant="contained" color="primary" onChange={onChangeAplicar} onClick={onClickAplicar}>Aplicar</Button>
                     </Stack>
                 )}
             </Stack>
