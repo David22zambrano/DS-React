@@ -948,7 +948,6 @@ export const components: Components<Theme> = {
       },
     },
   },
-
   MuiFormControl: {
     defaultProps: {
       size: "small",
@@ -980,7 +979,7 @@ export const components: Components<Theme> = {
     },
   },
   MuiIconButton: {
-    defaultProps:{
+    defaultProps: {
       color: "inherit"
     },
     styleOverrides: {
@@ -1068,7 +1067,7 @@ export const components: Components<Theme> = {
       asterisk: ({ theme }) => ({
         color: theme.palette.error.main,
       }),
-      error:({theme})=>({ color: theme.palette.text.secondary}),
+      error: ({ theme }) => ({ color: theme.palette.text.secondary }),
       root: {
         display: "flex",
         gap: ".2rem",
@@ -1176,6 +1175,15 @@ export const components: Components<Theme> = {
       size: "small",
     },
   },
+
+  MuiFormControlLabel: {
+    styleOverrides: {
+      root: {
+        marginLeft: 0,
+        marginRight: 0
+      }
+    }
+  },
   MuiSwitch: {
     variants: [
       {
@@ -1267,27 +1275,83 @@ export const components: Components<Theme> = {
   MuiTableBody: {
     styleOverrides: {
       root: {
-        ".MuiTableCell-body.MuiTableCell-sizeMedium": {
-          padding: "16px !important",
+        '&.MuiCheckbox-root': {
+          width: 'auto',
+          padding: '0 8px',
         },
-      },
+      }
     },
   },
   MuiTableCell: {
     styleOverrides: {
-      sizeMedium: {
-        padding: 13,
+      sizeSmall: {
+        padding: "2.5px 16px",
+        "& .MuiTableCell-head": {
+          padding: "2.61px 16px"
+        },
+        "& .MuiTableCell-body.MuiTableCell-sizeCompact": {
+          padding: "2.5px 16px",
+        },
       },
+      sizeMedium: {
+        padding: "5.5px 16px",
+        "& .MuiTableCell-head": {
+          padding: "6.61px 16px"
+        },
+        "& .MuiTableCell-body.MuiTableCell-sizeStandard": {
+          padding: "5.5px 16px",
+        },
+      },
+      root: {
+
+      }
     },
   },
   MuiTable: {
     defaultProps: {
-      size: "small",
+      size: "compact",
     },
+
     styleOverrides: {
       root: {
         minWidth: 630,
+        variants: [
+          {
+            props: { size: "standard", },
+            style: {
+              "& .MuiTableCell-head": {
+                padding: "6.61px 16px"
+              },
+              "& .MuiTableCell-body.MuiTableCell-sizeStandard": {
+                padding: "5.5px 16px",
+              },
+            }
+          },
+          {
+            props: { size: "compact", },
+            style: {
+
+              "& .MuiTableCell-head": {
+                padding: "2.61px 16px"
+              },
+              "& .MuiTableCell-body.MuiTableCell-sizeCompact": {
+                padding: "2.5px 16px",
+                '&.MuiCheckbox-root': {
+                  width: 'auto',
+                  padding: '0 8px',
+                },
+              },
+            }
+          }
+        ],
       },
     },
   },
+  MuiTableHead: {
+    styleOverrides: {
+      root: ({ theme }) => ({
+        backgroundColor: theme.palette.grey[50]
+      }),
+    },
+  }
 };

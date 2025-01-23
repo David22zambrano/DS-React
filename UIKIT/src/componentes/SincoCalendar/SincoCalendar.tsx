@@ -1,4 +1,3 @@
-// @ts-ignore
 import { Calendar, EventProps, momentLocalizer, Views } from 'react-big-calendar';
 import '../styles/calendar.scss';
 import { useMemo, useState, useEffect } from 'react';
@@ -7,6 +6,7 @@ import { MyEvent, SincoCalendarProps } from './generales';
 import { HeaderDayMonth } from './components/month/HeaderDayMonth';
 import { DateHeader } from './components/month/DateHeader';
 import moment from 'moment';
+import { StylesCalendar } from '../styles/styles';
 // import 'moment/locale/es';
 
 const localizer = momentLocalizer(moment);
@@ -29,7 +29,7 @@ export function SincoCalendar({
     const [currentView, setCurrentView] = useState(defaultView);
     const [repeatedEvents, setRepeatedEvents] = useState<MyEvent[]>([]);
 
-    const handleViewChange = (view: Views) => {
+    const handleViewChange = (view: typeof Views) => {
         setCurrentView(view);
     };
 
@@ -67,7 +67,7 @@ export function SincoCalendar({
     }), []);
 
     return (
-        <Calendar
+        <StylesCalendar
             culture="es"
             localizer={localizer}
             // events={repeatedEvents}

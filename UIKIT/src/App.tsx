@@ -1,11 +1,16 @@
 import moment from "moment"
 import { EjemploAdjuntar, EjemploMultiSelect } from "./componentes"
 import { SincoCalendar } from "./componentes/SincoCalendar/SincoCalendar"
-import { Button, IconButton, Stack } from "@mui/material"
-import { PageHeader } from "@sinco/react"
+import { Alert, Button, IconButton, Stack } from "@mui/material"
+import { Drawer, PageHeader } from "@sinco/react"
 // import { PageHeader } from "./componentes/PageHeaderT"
 import { PruebaModal } from "./componentes/Modal/EjemploModal"
-import { ArrowLeft, DeleteOutline } from "@mui/icons-material"
+import { ArrowLeft, CheckCircleOutline, DeleteOutline } from "@mui/icons-material"
+import { useState } from "react"
+import RadioButtonsGroup from "./componentes/prueba"
+import { EjemploDrawer } from "./componentes/drawer/EjemploDrawer"
+import BasicTable from "./componentes/Table/table"
+import EnhancedTable from "./componentes/Table/responsiveTable"
 
 // TIPS:
 
@@ -23,6 +28,8 @@ import { ArrowLeft, DeleteOutline } from "@mui/icons-material"
 
 
 function App() {
+
+
   return (
     // <Stack alignContent={"center"} justifyContent={"center"} p={2} gap={2} height={"700px"}>
     <Stack alignContent={"center"} justifyContent={"center"} p={2} gap={2} >
@@ -33,13 +40,22 @@ function App() {
        buttonBack={<IconButton color="primary"><ArrowLeft></ArrowLeft></IconButton>}
       />*/}
 
-      <EjemploAdjuntar />
+      {/* <EjemploAdjuntar />
       <Stack flexDirection={"row"} alignContent={"center"} justifyContent={"center"} p={2} gap={2}>
-        {/* <PruebaModal /> */}
+        <PruebaModal />
         <EjemploMultiSelect />
       </Stack>
 
-      {/* <SincoCalendar
+
+ */}
+      
+      {/* <EnhancedTable />
+      <BasicTable /> */}
+      {/* <Alert icon={<CheckCircleOutline fontSize="inherit" />} variant="outlined" severity="success">
+        Here is a gentle confirmation that your action was successful.
+      </Alert> */}
+      {/* <EjemploDrawer /> */}
+      <SincoCalendar
         defaultView="week"
 
         onDoubleClickEvent={() => { console.log('funciono ') }}
@@ -73,7 +89,7 @@ function App() {
           //   end: moment().set({ hour: 16, minute: 0 }).toDate(),
           // },
         ]}
-      /> */}
+      />
     </Stack>
   )
 }

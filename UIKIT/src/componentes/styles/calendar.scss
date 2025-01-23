@@ -77,81 +77,10 @@
   background-color: blue;
 }
 
-// body {
-//   margin: 0;
-// }
+// Rango de seleccion de dias
+.rbc-slot-selection {
 
-// // Estilos del evebnto
-// .rbc-event {
-//   background-color: transparent !important;
-//   box-shadow: transparent !important;
-// }
+}
+.rcb-slotselecting {
 
-// //Calendario  
-// .rbc-calendar {
-//   border: none;
-// }
-
-// //Header Del calendario ( toolbar )
-// .rbc-header {
-//   border-bottom: 2px solid white;
-// }
-
-// .rbc-month-header {
-//   border-left: none !important;
-// }
-
-// //Vista mensual contenedor de dias.
-// .rbc-month-view {
-//   border: 1px solid white;
-// }
-
-// // Bordes de cada fila de mi vista mensual
-// .rbc-month-row+.rbc-month-row {
-//   border-left: none !important;
-//   border-top: 4px solid transparent;
-// }
-
-// //estilos de cada fila 
-// .rbc-row-bg {
-//   gap: 4px;
-// }
-
-// // dia actual
-// .rbc-today {
-//   background-color: black;
-// }
-
-// //Color fondo de cada contenedor de dia.
-// .rbc-day-bg {
-//   background-color: #fbfbfb;
-//   border-radius: 4px;
-//   gap: 4px;
-//   border: none !important;
-// }
-
-// //Borde de fila 
-// .rbc-header+.rbc-header {
-//   border: none !important;
-// }
-
-// //celda seleccionada
-// .rbc-selected-cell {
-//   background-color: red;
-// }
-
-// //Celda fuera de rango del mes mostrado actualmente.
-// .rbc-off-range-bg {
-//   background-color: burlywood;
-//   border-radius: 4px;
-// }
-
-// // Cada contenedor de cada dia del mes
-// .rbc-date-cell {
-//   border-radius: 4px;
-
-//   &>.rbc-now .rbc-current {
-//     background-color: blue ;
-
-//   }
-// }
+}

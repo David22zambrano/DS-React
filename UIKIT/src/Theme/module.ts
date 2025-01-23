@@ -30,6 +30,12 @@ declare module "@mui/material/Checkbox" {
         large: true;
     }
 }
+declare module "@mui/material/Table" {
+    interface TablePropsSizeOverrides {
+        compact: true,
+        standard: true
+    }
+}
 
 // Augment the palette to include the ChipColors
 declare module '@mui/material/styles' {
